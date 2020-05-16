@@ -1,61 +1,36 @@
 <template>
   <div id="app">
-    <Calc v-bind:title="message" v-on:result-event="appAction" />
-    <hr>
-    <div><table v-html="log"></table></div>
+    <HelloWorld>
+    </HelloWorld>
   </div>
 </template>
 
 <script>
-import Calc from './components/Calc.vue'  //Calcをインポート
-
+import HelloWorld from './components/HelloWorld.vue'  //HElloWorldをインポート
 export default {
   name: 'app',
   components: {
-    Calc
+    HelloWorld
   },
-  data:function () {
-    return {
-      message: 'CALC',
-      result: [],
-    };
-  },
-  computed: {  // 算出プロパティ
-    log:function() {
-      var table = '<tr><th class="head">Expression</th><th class="head">Value</th></tr>';  //テーブル作成
-      for(var i in this.result) {
-        // テーブルにresultのi番目の配列の０番目の値とi番目の配列の１番目の値を入れる
-        table += '<tr><td>' + this.result[i][0] + '</td><td>' + this.result[i][1] + '</td></tr>' ;  
-      }
-      return table;
-    }
-  },
-  created: function(){
-    var items = localStorage.getItem('log');
-    var logs = JSON.parse(items);
-    if(logs != null) { this.result = logs;}
-  },
-  methods: {  // 初期化処理
-    appAction: function (expre, res) {
-      this.result.unshift([expre, res]);
-      if(this.result.length > 10) {
-        this.result.pop();
-      }
-      var log = JSON.stringifya(this.result);
-      localStorage.setItem('log', log);
-    }
-  }
 }
 </script>
-
+<!-- CSS -->
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: #2c3e50;
+  font-size: 20px;
+  color: #black;
+  background-color: Wheat;
   margin: 5px;
+}
+.hello{
+  text-align: left;
+}
+table{
+  margin-right: auto;
+  margin-left: auto;
 }
 tr td{
   padding: 5px;
@@ -68,5 +43,9 @@ tr th{
 tr th.head{
   background-color: black;
   color: white;
+}
+textarea{
+  font-size: 20px;
+  background-color: Wheat;
 }
 </style>
